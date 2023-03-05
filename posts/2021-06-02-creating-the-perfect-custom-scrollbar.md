@@ -4,10 +4,8 @@
 
 ---
 
-<p align="center">
-  <img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/1.png" />
-  From https://lapisapp.com which uses mr-scroll
-</p>
+<p align="center"><img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/1.png" /></p>
+<p align="center">From https://lapisapp.com which uses mr-scroll</p>
 
 In a world that's moving more towards sleek looking single page apps, the native browser scrollbar has been the mainstay of the old legacy look and feel. And while there has always been a way to customize it on certain browsers, the lack of a standard specification for the longest time left a lot to be desired.
 
@@ -21,15 +19,11 @@ Once upon a time, IE introduced a way to customize the scrollbar. This carried o
 
 A few years ago, the W3C started drafting a new standard that replaces the older spec, promising this time to finally have a standard for customizing scrollbars. This is the CSS Scrollbars Module. Alas, this new standard feels extremely barebone, contributing only 2 CSS properties: scrollbar-width and scrollbar-color. This is nowhere near the level of customization we have with webkit customization, as the only 2 features you can control is the colors of the track/thumb, and whether you want a normal or "thin" scrollbar.
 
-<p align="center">
-  <img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/2.png" />
-  scrollbar-width: auto;
-</p>
+<p align="center"><img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/2.png" /></p>
+<p align="center">scrollbar-width: auto;</p>
 
-<p align="center">
-  <img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/3.png" />
-  scrollbar-width: thin;
-</p>
+<p align="center"><img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/3.png" /></p>
+<p align="center">scrollbar-width: thin;</p>
 
 And that is pretty much all the customization you get.
 
@@ -47,10 +41,8 @@ For the sync problem, most custom libraries usually use a brute-force approach t
 
 ## mr-scroll
 
-<p align="center">
-  <img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/4.png" />
-  The simplest mr-scroll in action
-</p>
+<p align="center"><img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/4.png" /></p>
+<p align="center">The simplest mr-scroll in action</p>
 
 [mr-scroll](https://github.com/mrahhal/mr-scroll) is an open sourced library I spent a long time perfecting while using it in several projects. It succeeds in solving all the problems listed above, providing a single standard way to use customizable scrollbars that feel native and look the same across all modern browsers. And to make it easier for the consumer, it has idiomatic and efficient wrapper packages for popular frameworks (angular, react, vue).
 
@@ -66,10 +58,8 @@ There are also flags such as the ability to show on hover only.
 
 ### Content fade
 
-<p align="center">
-  <img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/5.png" />
-  You can see the content fade in action at the bottom, indicating that there's more content that's hidden below "Admin"
-</p>
+<p align="center"><img src="../assets/2021-06-02-creating-the-perfect-custom-scrollbar/5.png" /></p>
+<p align="center">You can see the content fade in action at the bottom, indicating that there's more content that's hidden below "Admin"</p>
 
 ### Documented support for creating complex layouts
 
