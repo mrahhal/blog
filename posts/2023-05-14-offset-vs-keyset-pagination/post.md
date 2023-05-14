@@ -4,11 +4,11 @@
 
 ---
 
-Offset pagination is the most used pagination method, often for no other reason than it being the easiest choice. But for a lot of cases, keyset pagination is a much better method.
+Offset pagination is the most used pagination method, often for no other reason than it being the easiest most available choice. But in a lot of cases, keyset pagination can provide a much more performant pagination mechanism.
 
-I'm going to go over a few benchmarks between offset and keyset pagination. These are taken from [MR.EntityFrameworkCore.KeysetPagination](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination), a library which greatly simplifies doing keyset pagination with EF Core.
+I'm going to go over a few benchmarks between offset and keyset pagination. These are taken from [MR.EntityFrameworkCore.KeysetPagination](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination), a library which greatly simplifies doing keyset pagination when using [EF Core](https://learn.microsoft.com/en-us/ef/core/).
 
-First, we'll briefly introduce each pagination method, the defects, and the use cases best suited for each of them.
+First, we'll briefly introduce each pagination method, the problems, and the use cases best suited for each of them.
 
 I'm particularly interested in the common use cases where offset pagination becomes a bottleneck, and to see just how much of a difference keyset pagination will make in comparison.
 
