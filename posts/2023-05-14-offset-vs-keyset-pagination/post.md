@@ -8,7 +8,7 @@ Offset pagination is the most used pagination method, often for no other reason 
 
 I'm going to go over a few benchmarks between offset and keyset pagination. These are taken from [MR.EntityFrameworkCore.KeysetPagination](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination), a library which greatly simplifies doing keyset pagination when using [EF Core](https://learn.microsoft.com/en-us/ef/core/).
 
-First, we'll briefly introduce each pagination method, the problems, and the use cases best suited for each of them.
+First, we'll briefly introduce each pagination method, the problems, and the use cases best suited for each of them, without going into too much details.
 
 I'm particularly interested in the common use cases where offset pagination becomes a bottleneck, and to see just how much of a difference keyset pagination will make in comparison.
 
@@ -18,7 +18,7 @@ If you're already familiar with both methods, you can skip directly to the [benc
 
 Offset pagination is the classic way of paginating data, both in EF Core and in pretty much any other framework/ORM/language. The reason is simple. It's both the easiest way to do pagination _and_ it's intuitively easy to understand.
 
-Offset pagination works by using the `OFFSET` SQL clause combined with a pipelined top-N clause (aka `FETCH FIRST`). This provides an intuitive pagination method, where you can imagine pages of data each having a max number of records, and so each covering records from a well known offset to another.
+Offset pagination works by using the `OFFSET` SQL clause combined with a pipelined top-N clause (aka `FETCH FIRST`). This provides an intuitive pagination method where you can imagine pages of data each covering records from a well known offset to another.
 
 The main advantage of offset pagination is allowing random access to any numbered page. This usually appears as the following from a user perspective, where a user can _seek_\* to any page.
 
@@ -28,7 +28,7 @@ The main advantage of offset pagination is allowing random access to any numbere
 
 The further away the page you want to retrieve is, the worse performance gets, and the longer the query takes. The reason for this is that the database engine will still need to go through all the pages you're _skipping_ until it reaches the target page. So it's closer to a table scan, at least up until the desired page is reached.
 
-One additional disadvantage to offset pagination is what we call _unstable pagination_. This materializes itself as a bunch of possible anomalies when paginating, including skipping over data or showing duplicated data. The reason is easy to understand, just imagine records getting added/deleted in the page you're in (or the pages before), and then navigating to other pages in between. This problem can't be solved, not by you nor the database, as it's purely a side effect of how offset pagination works by design.
+One additional disadvantage to offset pagination is what we call _unstable pagination_. This describes a bunch of possible anomalies when paginating, including skipping over data or showing duplicated data. As a common example, imagine records getting added/deleted in the page you're in (or the pages before), and then navigating to the next page. This leads to any number of unexpected skipped/duplicated data. This problem can't be solved, not by you nor the database, as it's purely a side effect of how offset pagination inherently works by design.
 
 ## Keyset pagination
 
@@ -41,17 +41,17 @@ Keyset pagination works by starting from a reference record, seeking there, and 
 Here are a few common use cases that would benefit the most out of keyset pagination:
 
 - Infinite scrolling (ex. social network feeds such as twitter)
-- An ever growing list of records that you want to be able to access fully (ex. GitHub commits)
+- An ever growing list of records that you want to be able to fully access (ex. GitHub commits)
 
 On the other hand, and in contrast to offset pagination, keyset pagination proves more difficult to implement and to generally work with. It's also less intuitive to understand. In addition, the particular predicate inside `WHERE` also changes for the same logical query depending on whether you're doing an after or before seek, leading to more complexity. That said, a well made library can greatly shrink that difficulty difference between offset and keyset to practically zero.
 
 What about the unstable pagination problem that afflicted offset pagination? In keyset pagination, if your keyset consists of immutable columns (columns that don't change, ex. `Created` + `Id`), then stable pagination is guaranteed. You'll never skip over or see duplicated data as you navigate pages. Depending on your requirements, this could be yet another major advantage.
 
-From a user perspective, here is an example of how a user will interact with a keyset paginated page.
+From a user perspective, here is an example of how a user will interact with a keyset paginated page:
 
 <img src="./assets/keyset-bar.png" width="120" />
 
-This second example is from GitHub's commits page.
+This second example is from GitHub's commits page:
 
 <img title="GitHub commits" src="./assets/keyset-bar-github.png" width="120" />
 
@@ -73,7 +73,7 @@ To start, let's take the simplest example. We'll paginate data according to the 
 
 Notice that when querying the first page, offset pagination does just as well as keyset. Offset pagination starts falling behind remarkably the further away the page you want to read is.
 
-To that point, the keyset bars (green) are barely visible in the MidPage and LastPage graphs. This shows the major difference in performance characteristic over large amounts of data even when querying further away pages.
+To that point, the keyset bars (green) are barely visible in the MidPage and LastPage graphs. This shows the major difference in performance characteristics over large amounts of data when querying further away pages.
 
 Here's the same benchmark but now for the following order: `Created` + `Id`
 
