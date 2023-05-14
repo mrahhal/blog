@@ -101,8 +101,8 @@ Putting the main differences into a table.
 | Duplicate/Skipped data | always a possibility if data gets updated between page navigations | no duplication/skipping\*\*             |
 | Pages                  | can access random pages                                            | can only go to first/previous/next/last |
 
-\*: "over large data" here means trying to access _further away_ pages.<br>
-\*\*: Only if you use a [deterministic keyset](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination#deterministic-keysets).
+\* "over large data" here means trying to access _further away_ pages.<br>
+\*\* Only if you use a [deterministic keyset](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination#deterministic-keysets).
 
 If you have a requirement that forces you to provide random access to numbered pages, then you really don't have a choice but going with offset pagination. Otherwise, if you don't have a lot of data or if you can put an upper limit on the number of pages you want your users to navigate to (for example 100 pages), and you are not bother by unstable pagination, then you could use offset pagination.
 
