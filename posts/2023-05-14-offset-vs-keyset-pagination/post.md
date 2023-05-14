@@ -106,7 +106,9 @@ Putting the main differences into a table.
 
 If you have a requirement that forces you to provide random access to numbered pages, then you really don't have a choice but going with offset pagination. Otherwise, if you don't have a lot of data or if you can put an upper limit on the number of pages you want your users to navigate to (for example 100 pages), and you are not bother by unstable pagination, then you could use offset pagination.
 
-For every other case, prefer keyset pagination. It's better, it's faster, and libraries such as [MR.EntityFrameworkCore.KeysetPagination](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination) make it a breeze to implement.
+For every other case, prefer keyset pagination. It's better, it's faster.
+
+Libraries such as [MR.EntityFrameworkCore.KeysetPagination](https://github.com/mrahhal/MR.EntityFrameworkCore.KeysetPagination) make it a breeze to implement. For other languages, check the "But the Frameworks…" section in [this page](https://use-the-index-luke.com/no-offset) for keyset support in other frameworks.
 
 ## Links
 
