@@ -55,7 +55,7 @@ This second example is from GitHub's commits page.
 
 <img title="GitHub commits" src="./assets/keyset-bar-github.png" width="120" />
 
-> An interesting functionality you could implement is a page where a user searches and selects a record, and then a list is retrieved containing a few records before and a few records after the selection. This isn't possible with offset pagination. Think of a git client where a user can search for a commit, and then _expand_ the context, so as to see further and further above and below. Incidentally, this is very similar to how some git clients expand hunks in diffs.
+An interesting functionality you could implement is a page where a user searches and selects a record, and then a list is retrieved containing a few records before and a few records after the selection. This isn't possible with offset pagination. Think of a git client where a user can search for a commit, and then _expand_ the context, so as to see further and further above and below. Incidentally, this is very similar to how some git clients expand hunks in diffs.
 
 ## Benchmarks
 
